@@ -33,7 +33,7 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
       warden.custom_failure!
       message = @user.errors.full_messages.join('\n')
       render json: {
-          error_message: messages
+          error_message: message
       }, status: :bad_request
     end
   end
