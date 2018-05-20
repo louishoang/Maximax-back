@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  acts_as_token_authenticatable
+
+  DEFAULT_AUTH_TOKEN_REFRESH_CYCLE = 2.weeks
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
