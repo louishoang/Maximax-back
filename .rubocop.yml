@@ -1,0 +1,29 @@
+Metrics/LineLength:
+  Max: 170
+
+Documentation:
+  Enabled: false
+
+CommentedKeyword:
+  Enabled: false
+
+ClassAndModuleChildren:
+  Enabled: false
+
+MethodLength:
+  Enabled: false
+
+BlockLength:
+  Enabled: false
+
+AbcSize:
+  Enabled: false
+
+MixinUsage:
+  Enabled: false
+
+DateTime:
+  Enabled: false
+
+Void:
+ Enabled: false

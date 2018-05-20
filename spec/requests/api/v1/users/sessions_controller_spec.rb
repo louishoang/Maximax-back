@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe 'Api::V1::Users::SessionsController', :type => :request do
+RSpec.describe 'Api::V1::Users::SessionsController', type: :request do
   !let(:user) { FactoryBot.create(:user) }
 
   context 'POST #create' do
     context 'when user exists and confirmed' do
       before do
         user.confirm
-        post '/api/v1/users/sign_in', params: { user: {email: user.email, password: user.password } }
+        post '/api/v1/users/sign_in', params: { user: { email: user.email, password: user.password } }
       end
 
       it 'returns 200' do
@@ -33,7 +35,7 @@ RSpec.describe 'Api::V1::Users::SessionsController', :type => :request do
 
     context 'when user exists but NOT confirmed yet' do
       before do
-        post '/api/v1/users/sign_in', params: { user: {email: user.email, password: user.password } }
+        post '/api/v1/users/sign_in', params: { user: { email: user.email, password: user.password } }
       end
 
       it 'returns 401' do
@@ -49,7 +51,7 @@ RSpec.describe 'Api::V1::Users::SessionsController', :type => :request do
       let(:not_existed_user) { FactoryBot.build(:user) }
 
       before do
-        post '/api/v1/users/sign_in', params: { user: {email: not_existed_user.email, password: not_existed_user.password } }
+        post '/api/v1/users/sign_in', params: { user: { email: not_existed_user.email, password: not_existed_user.password } }
       end
 
       it 'returns 401' do
@@ -89,7 +91,7 @@ RSpec.describe 'Api::V1::Users::SessionsController', :type => :request do
       let(:token) { user.authentication_token }
 
       before do
-        delete '/api/v1/users/sign_out', headers: { "X-User-Token" => token, "X-User-Email" => user.email }
+        delete '/api/v1/users/sign_out', headers: { 'X-User-Token' => token, 'X-User-Email' => user.email }
       end
 
       it 'returns 200' do

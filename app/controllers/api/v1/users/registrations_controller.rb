@@ -13,14 +13,14 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
         sign_up(:user, @user)
 
         render json: @user.as_json(
-            auth_token: user.authentication_token,
-            email: user.email
+          auth_token: user.authentication_token,
+          email: user.email
         ), status: :created
       else
         # User signed up but inactive
         expire_data_after_sign_in!
         render json: {
-            message: translate('devise.confirmations.send_instructions')
+          message: translate('devise.confirmations.send_instructions')
         }, status: :ok
       end
 
@@ -28,7 +28,7 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
       warden.custom_failure!
       message = @user.errors.full_messages.join('\n')
       render json: {
-          error_message: message
+        error_message: message
       }, status: :bad_request
     end
   end
@@ -68,7 +68,6 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
   # def configure_account_update_params
   #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
   # end
-
 
   def resource_name
     :user
