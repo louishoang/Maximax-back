@@ -22,8 +22,8 @@ class User < ApplicationRecord
   private
 
   def ensure_auth_token_issued_at
-    if authentication_token.blank? || authentication_token_changed?
-      self.auth_token_issued_at = DateTime.now
-    end
+    return unless authentication_token.blank? || authentication_token_changed?
+
+    self.auth_token_issued_at = DateTime.now
   end
 end
