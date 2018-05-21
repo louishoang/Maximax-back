@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe 'Api::V1::Users::RegistrationsController', :type => :request do
+RSpec.describe 'Api::V1::Users::RegistrationsController', type: :request do
   context '#create' do
     let(:user_params) do
       {
@@ -27,7 +29,7 @@ RSpec.describe 'Api::V1::Users::RegistrationsController', :type => :request do
         end
       end
 
-      %i(email password).each do |key|
+      %i[email password].each do |key|
         context "When param #{key} is missing" do
           before { user_params.delete(key) }
 
