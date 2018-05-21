@@ -1,24 +1,5 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Maximax supermarket backend built on Ruby on Rails
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+[![Build Status](https://semaphoreci.com/api/v1/projects/13e700de-f986-4fd0-88c5-29bf5c811159/1978318/badge.svg)](https://semaphoreci.com/louishoang-77/maximax-back)
