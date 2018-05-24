@@ -16,6 +16,7 @@
 
 require File.expand_path('../config/environment', __dir__)
 require 'support/test_helpers'
+require 'database_cleaner'
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
@@ -97,4 +98,14 @@ RSpec.configure do |config|
   #   # test failures related to randomization by passing the same `--seed` value
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
+  #
+  DatabaseCleaner.strategy = :transaction
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 end
