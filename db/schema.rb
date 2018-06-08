@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_180_524_191_850) do
+ActiveRecord::Schema.define(version: 20_180_607_193_047) do
   create_table 'brands', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
     t.string 'name', null: false
   end
@@ -94,9 +94,13 @@ ActiveRecord::Schema.define(version: 20_180_524_191_850) do
     t.datetime 'updated_at', null: false
     t.string 'authentication_token', limit: 30
     t.datetime 'auth_token_issued_at'
+    t.string 'first_name'
+    t.string 'last_name'
     t.index ['authentication_token'], name: 'index_users_on_authentication_token', unique: true
     t.index ['confirmation_token'], name: 'index_users_on_confirmation_token', unique: true
     t.index ['email'], name: 'index_users_on_email', unique: true
+    t.index ['first_name'], name: 'index_users_on_first_name'
+    t.index ['last_name'], name: 'index_users_on_last_name'
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end
 
