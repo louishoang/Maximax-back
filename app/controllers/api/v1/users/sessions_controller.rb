@@ -12,7 +12,8 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
       # TODO: use active record serilizer to format expire_at
       auth_token_expired_at = user.auth_token_expired_at.iso8601
       render json: {
-        user: user.as_json(only: %i[email authentication_token]).merge(auth_token_expired_at: auth_token_expired_at),
+        user: user.as_json(only: %i[email authentication_token first_name last_name])
+                  .merge(auth_token_expired_at: auth_token_expired_at),
         message: translate('devise.sessions.signed_in')
       }, status: :ok
     else
