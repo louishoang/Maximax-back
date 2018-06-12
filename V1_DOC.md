@@ -42,3 +42,45 @@ NOTE: likely not used because all users need to confirm the account
         email: <string>
     }
 ```
+
+#### Login
+
+    POST /api/v1/users/sign_in
+    
+##### Required data
+    user:
+        - email: string, required
+        - password: string, required
+        - grand_type: string, required: default: 'password'
+        
+##### Sample Request:
+    curl -X POST http://localhost:3000/api/v1/users/sign_in
+      -F 'user[password]=123456789'
+      -F user[email]=user1@gmail.com
+      -F grand_type=password
+      
+##### Sample Response:
+
+- Succeeded <HTTP status 200>
+
+```
+    {
+      user: {
+         "email": string, Ex:"user1@gmail.com"
+         "authentication_token": string, Ex: "irQQUj6PqyN_Qy6xyw13"
+         "auth_token_expired_at": datetime, Ex: "2018-06-04T00:21:56Z"
+      },
+      message: string, Ex: "Signed in successfully"
+    }
+```
+
+- Failed or Unconfirmed <HTTP status 401>
+
+```
+    {
+        error_message: string, Ex: Invalid email or password.
+    }
+```
+
+
+
