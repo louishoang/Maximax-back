@@ -69,6 +69,9 @@ NOTE: likely not used because all users need to confirm the account
          "email": string, Ex:"user1@gmail.com"
          "authentication_token": string, Ex: "irQQUj6PqyN_Qy6xyw13"
          "auth_token_expired_at": datetime, Ex: "2018-06-04T00:21:56Z"
+         "first_name": string
+         "last_name": string
+         "role": string, Ex: admin, manager, customer
       },
       message: string, Ex: "Signed in successfully"
     }

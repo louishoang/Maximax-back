@@ -3,8 +3,6 @@
 class Variant < ApplicationRecord
   belongs_to :product
   belongs_to :inventory
-  has_many :variant_properties
-  has_many :properties, through: :variant_properties
 
   validates :price,       presence: true
   validates :cost,        presence: true
