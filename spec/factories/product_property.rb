@@ -4,6 +4,6 @@ FactoryBot.define do
   factory :product_property do
     product
     property
-    description 'Red, Blue, Orange'
+    value %w[Red Blue Orange].sample
   end
 end

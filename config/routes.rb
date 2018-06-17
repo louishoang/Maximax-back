@@ -8,7 +8,10 @@ Rails.application.routes.draw do
         sessions: 'api/v1/users/sessions'
       }
 
-      resources :recipes
+      namespace :admin do
+        resources :products
+        resources :option_types
+      end
     end
   end
 end
