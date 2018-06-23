@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       namespace :admin do
         resources :products
         resources :option_types
+        resources :categories, only: :index
+        resources :brands, only: [:index, :create, :update]
       end
     end
   end
