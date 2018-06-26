@@ -10,6 +10,7 @@ FactoryBot.define do
     available_at Time.now
     deleted_at nil
     meta_description 'Describe the variant'
-    meta_keywords 'Key One, Key Two'
+    meta_keywords ['Key One', 'Key Two']
+    product_keywords ['Keyword one', 'two']
   end
 end

@@ -96,6 +96,6 @@ class Product < ApplicationRecord
         .remove_hyper_text # remove hyper text
         .remove_words_less_than_x_characters # remove words less than 2 characters
         .first(197) # limit to 197 characters
-    ].join(': ')
+    ]
   end
 end
