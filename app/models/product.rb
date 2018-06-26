@@ -1,10 +1,15 @@
 # frozen_string_literal: true
 
 class Product < ApplicationRecord
+  STATUS_PENDING = 'Pending'
+  STATUS_ACTIVE = 'Active'
+  STATUS_DELETED = 'Deleted'
+
   extend FriendlyId
   friendly_id :permalink, use: :finders
 
   serialize :product_keywords, Array
+  serialize :meta_keywords, Array
 
   belongs_to :brand
   belongs_to :category
@@ -21,6 +26,42 @@ class Product < ApplicationRecord
   validates :meta_keywords,    presence: true,   length: { maximum: 255 }
   validates :permalink,        uniqueness: true, length: { maximum: 150 }
   validates :meta_description, presence: true,   length: { maximum: 255 }
+
+
+  def status
+    return STATUS_PENDING if available_at.nil? || deleted_at.nil?
+
+    current_time = Time.now
+    if current_time < available_at
+      STATUS_PENDING
+    elsif current_time.between?(available_at, deleted_at)
+      STATUS_ACTIVE
+    else
+      STATUS_DELETED
+    end
+  end
+
+  def as_json(*)
+    def as_json(*)
+      super.tap do |hash|
+        hash['status'] = status
+        hash[:sku] = sku
+        hash[:price] = price
+      end
+    end
+  end
+
+  def master_variant
+    variants.where(master: true).first || NullVariant.new
+  end
+
+  def sku
+    master_variant.sku
+  end
+
+  def price
+    master_variant.price
+  end
 
   private
 

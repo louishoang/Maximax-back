@@ -2,8 +2,14 @@
 
 class Api::V1::Admin::ProductsController < Api::V1::Admin::BaseController
   def index
-    products = Product.all
-    render json: products.as_json
+    products = Product.includes(:variants)
+                      .order(params[:sort_by])
+                      .page(params[:page])
+                      .per(params[:page_size])
+    render json: {
+      products: products.as_json,
+      record_count: products.size
+    }
   end
 
   def create
