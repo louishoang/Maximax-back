@@ -42,12 +42,10 @@ class Product < ApplicationRecord
   end
 
   def as_json(*)
-    def as_json(*)
-      super.tap do |hash|
-        hash['status'] = status
-        hash[:sku] = sku
-        hash[:price] = price
-      end
+    super.tap do |hash|
+      hash['status'] = status
+      hash[:sku] = sku
+      hash[:price] = price
     end
   end
 
