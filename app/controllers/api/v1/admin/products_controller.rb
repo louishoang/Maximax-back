@@ -12,6 +12,11 @@ class Api::V1::Admin::ProductsController < Api::V1::Admin::BaseController
     }
   end
 
+  def show
+    product = Product.friendly.find(params[:id])
+    render json: product
+  end
+
   def create
     product = Product.new(formatted_params)
     authorize! :create, product
@@ -49,6 +54,7 @@ class Api::V1::Admin::ProductsController < Api::V1::Admin::BaseController
   def formatted_params
     cloned_params = product_params.deep_dup
     %w(product_keywords meta_keywords).each do |key|
+      next if cloned_params[key].is_a? Array
       cloned_params[key] = cloned_params[key].split(', ')
     end
     cloned_params
@@ -57,6 +63,7 @@ class Api::V1::Admin::ProductsController < Api::V1::Admin::BaseController
   def product_params
     params.require(:product).permit(:name, :description, :category_id,
                                     :permalink, :available_at, :deleted_at,
-                                    :meta_keywords, :meta_description, :brand_id, :product_keywords)
+                                    :meta_keywords, :meta_description, :brand_id, :product_keywords,
+                                    product_keywords: [], meta_keywords: [])
   end
 end
