@@ -7,7 +7,7 @@ class Api::V1::Admin::ProductsController < Api::V1::Admin::BaseController
                       .page(params[:page])
                       .per(params[:page_size])
     render json: {
-      products: products.as_json,
+      products: products,
       record_count: products.size
     }
   end
