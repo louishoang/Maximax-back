@@ -14,7 +14,7 @@ class Api::V1::Admin::ProductsController < Api::V1::Admin::BaseController
 
   def show
     product = Product.friendly.find(params[:id])
-    render json: product
+    render json: product.as_json
   end
 
   def create

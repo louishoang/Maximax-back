@@ -1,7 +1,7 @@
 class Api::V1::Admin::BrandsController < Api::V1::Admin::BaseController
   def index
     brands = Brand.all
-    render json: brands.as_json
+    render json: brands
   end
 
   def create
