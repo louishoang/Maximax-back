@@ -17,6 +17,7 @@ class Product < ApplicationRecord
   has_many :properties, through: :product_properties
   has_many :variants
   has_many :active_variants, -> { where(deleted_at: nil) }, class_name: 'Variant'
+  has_many :product_images, -> { order(:position) }, dependent: :destroy
 
   before_validation :sanitize_data
   before_validation :not_active_on_create!, on: :create
@@ -26,7 +27,6 @@ class Product < ApplicationRecord
   validates :meta_keywords,    presence: true,   length: { maximum: 255 }
   validates :permalink,        uniqueness: true, length: { maximum: 150 }
   validates :meta_description, presence: true,   length: { maximum: 255 }
-
 
   def status
     return STATUS_PENDING if available_at.nil? || deleted_at.nil?
@@ -46,6 +46,13 @@ class Product < ApplicationRecord
       hash['status'] = status
       hash[:sku] = sku
       hash[:price] = price
+      hash[:images] = product_images.map do |image|
+        {
+          id: image.id,
+          url: Rails.application.routes.url_helpers.rails_blob_url(image.file)
+        }
+      end
+      hash
     end
   end
 

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class Api::V1::Admin::BrandsController < Api::V1::Admin::BaseController
   def index
     brands = Brand.all
-    render json: brands.as_json
+    render json: brands
   end
 
   def create
@@ -12,7 +14,7 @@ class Api::V1::Admin::BrandsController < Api::V1::Admin::BaseController
       head :created
     else
       render json: {
-          error_message: brand.errors.full_messages.join('/n')
+        error_message: brand.errors.full_messages.join('/n')
       }, status: :unprocessable_entity
     end
   end
@@ -25,7 +27,7 @@ class Api::V1::Admin::BrandsController < Api::V1::Admin::BaseController
       head :ok
     else
       render json: {
-          error_message: brand.errors.full_messages.join('/n')
+        error_message: brand.errors.full_messages.join('/n')
       }, status: :unprocessable_entity
     end
   end

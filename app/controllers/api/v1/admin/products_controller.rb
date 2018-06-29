@@ -14,7 +14,7 @@ class Api::V1::Admin::ProductsController < Api::V1::Admin::BaseController
 
   def show
     product = Product.friendly.find(params[:id])
-    render json: product
+    render json: product.as_json
   end
 
   def create
@@ -53,7 +53,7 @@ class Api::V1::Admin::ProductsController < Api::V1::Admin::BaseController
 
   def formatted_params
     cloned_params = product_params.deep_dup
-    %w(product_keywords meta_keywords).each do |key|
+    %w[product_keywords meta_keywords].each do |key|
       next if cloned_params[key].is_a? Array
       cloned_params[key] = cloned_params[key].split(', ')
     end

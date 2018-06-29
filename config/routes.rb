@@ -10,9 +10,10 @@ Rails.application.routes.draw do
 
       namespace :admin do
         resources :products
+        resources :product_images
         resources :option_types
         resources :categories, only: :index
-        resources :brands, only: [:index, :create, :update]
+        resources :brands, only: %i[index create update]
       end
     end
   end
