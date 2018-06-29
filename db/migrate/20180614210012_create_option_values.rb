@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateOptionValues < ActiveRecord::Migration[5.2]
   def change
     create_table :option_values do |t|
@@ -8,7 +10,7 @@ class CreateOptionValues < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    add_index :option_values, [:name, :display_name]
+    add_index :option_values, %i[name display_name]
     add_index :option_values, :option_type_id
     add_index :option_values, :position
   end

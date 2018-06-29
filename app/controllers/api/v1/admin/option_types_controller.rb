@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::Admin::OptionTypesController < Api::V1::Admin::BaseController
   def create
     authorize! :create, :OptionType
@@ -13,5 +15,7 @@ class Api::V1::Admin::OptionTypesController < Api::V1::Admin::BaseController
 
   private
 
-  params.require(:option_type).permit(:name, :display_name, :position)
+  def option_type_params
+    params.require(:option_type).permit(:name, :display_name, :position)
+  end
 end

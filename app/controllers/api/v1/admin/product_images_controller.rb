@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::Admin::ProductImagesController < Api::V1::Admin::BaseController
   def create
     product = Product.friendly.find(params[:product_id])

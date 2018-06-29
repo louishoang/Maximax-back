@@ -28,7 +28,6 @@ class Product < ApplicationRecord
   validates :permalink,        uniqueness: true, length: { maximum: 150 }
   validates :meta_description, presence: true,   length: { maximum: 255 }
 
-
   def status
     return STATUS_PENDING if available_at.nil? || deleted_at.nil?
 

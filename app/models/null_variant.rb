@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NullVariant
   def sku
     '000-000-000'

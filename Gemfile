@@ -38,15 +38,15 @@ gem 'jbuilder', '~> 2.5'
 gem 'friendly_id', '~> 5.1.0'
 
 # Reduces boot times through caching; required in config/boot.rb
+gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'cancancan', '~> 2.0'
 gem 'devise'
+gem 'kaminari'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rubocop', require: false
 gem 'simple_token_authentication', '~> 1.0'
 gem 'timecop'
-gem 'kaminari'
-gem 'aws-sdk-s3', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
