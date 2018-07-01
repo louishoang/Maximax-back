@@ -41,21 +41,6 @@ class Product < ApplicationRecord
     end
   end
 
-  def as_json(*)
-    super.tap do |hash|
-      hash['status'] = status
-      hash[:sku] = sku
-      hash[:price] = price
-      hash[:images] = product_images.map do |image|
-        {
-          id: image.id,
-          url: Rails.application.routes.url_helpers.rails_blob_url(image.file)
-        }
-      end
-      hash
-    end
-  end
-
   def master_variant
     variants.where(master: true).first || NullVariant.new
   end

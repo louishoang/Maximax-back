@@ -6,15 +6,14 @@ class Api::V1::Admin::ProductsController < Api::V1::Admin::BaseController
                       .order(params[:sort_by])
                       .page(params[:page])
                       .per(params[:page_size])
-    render json: {
-      products: products,
-      record_count: products.size
-    }
+
+    render json: { products: products.map{ |p| ProductSerializer.new(p).as_json },
+                   record_count: products.size }
   end
 
   def show
     product = Product.friendly.find(params[:id])
-    render json: product.as_json
+    render json: product
   end
 
   def create
