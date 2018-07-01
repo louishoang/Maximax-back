@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 20_180_628_023_155) do
   create_table 'option_values', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
     t.string 'name', limit: 100
     t.string 'display_name', limit: 100
-    t.integer 'position', default: 0, null: false
+    t.integer 'position', default: 1, null: false
     t.integer 'option_type_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
