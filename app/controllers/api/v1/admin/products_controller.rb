@@ -2,7 +2,7 @@
 
 class Api::V1::Admin::ProductsController < Api::V1::Admin::BaseController
   def index
-    products = Product.includes(:variants)
+    products = Product.includes(:product_images)
                       .order(params[:sort_by])
                       .page(params[:page])
                       .per(params[:page_size])

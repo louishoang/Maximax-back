@@ -9,5 +9,7 @@ class OptionType < ApplicationRecord
   has_many :products, through: :product_option_types
 
   validates :name, uniqueness: true, allow_blank: true
-  validates :display_name
+  validates :display_name, presence: true
+
+  accepts_nested_attributes_for :option_values, allow_destroy: true
 end
