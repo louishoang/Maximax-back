@@ -4,7 +4,6 @@ FactoryBot.define do
   factory :variant do
     sku Faker::Code.imei
     product
-    inventory
     price Faker::Commerce.price
     cost Faker::Commerce.price * 70 / 100
     deleted_at nil
