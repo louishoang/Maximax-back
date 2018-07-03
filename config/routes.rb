@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         resources :product_images
         resources :option_types
         resources :variants
+        resources :properties
         resources :categories, only: :index
         resources :brands, only: %i[index create update]
       end
