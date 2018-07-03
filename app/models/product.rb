@@ -18,6 +18,8 @@ class Product < ApplicationRecord
   has_many :variants
   has_many :active_variants, -> { where(deleted_at: nil) }, class_name: 'Variant'
   has_many :product_images, -> { order(:position) }, dependent: :destroy
+  has_many :product_option_types, dependent: :destroy, inverse_of: :product
+  has_many :option_types, through: :product_option_types
 
   before_validation :sanitize_data
   before_validation :not_active_on_create!, on: :create

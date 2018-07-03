@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_180_628_023_155) do
+ActiveRecord::Schema.define(version: 20_180_702_183_227) do
   create_table 'active_storage_attachments', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
     t.string 'name', null: false
     t.string 'record_type', null: false
@@ -71,6 +71,13 @@ ActiveRecord::Schema.define(version: 20_180_628_023_155) do
     t.index ['name'], name: 'index_option_types_on_name'
   end
 
+  create_table 'option_value_variants', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
+    t.integer 'variant_id'
+    t.integer 'option_value_id'
+    t.index ['option_value_id'], name: 'index_option_value_variants_on_option_value_id'
+    t.index %w[variant_id option_value_id], name: 'index_option_value_variants_on_variant_id_and_option_value_id'
+  end
+
   create_table 'option_values', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
     t.string 'name', limit: 100
     t.string 'display_name', limit: 100
@@ -90,6 +97,17 @@ ActiveRecord::Schema.define(version: 20_180_628_023_155) do
     t.datetime 'updated_at', null: false
     t.index ['position'], name: 'index_product_images_on_position'
     t.index ['product_id'], name: 'index_product_images_on_product_id'
+  end
+
+  create_table 'product_option_types', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
+    t.integer 'position'
+    t.integer 'product_id'
+    t.integer 'option_type_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['option_type_id'], name: 'index_product_option_types_on_option_type_id'
+    t.index ['position'], name: 'index_product_option_types_on_position'
+    t.index ['product_id'], name: 'index_product_option_types_on_product_id'
   end
 
   create_table 'product_properties', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
