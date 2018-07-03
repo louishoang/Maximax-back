@@ -5,11 +5,14 @@ class OptionType < ApplicationRecord
     has_many :option_values, -> { order(:position) }
     has_many :product_option_types
   end
-
   has_many :products, through: :product_option_types
 
   validates :name, uniqueness: true, allow_blank: true
   validates :display_name, presence: true
 
   accepts_nested_attributes_for :option_values, allow_destroy: true
+
+  scope :with_ids, lambda { |ids|
+    where('id IN (?)', ids.split(', ')) if ids.present?
+  }
 end

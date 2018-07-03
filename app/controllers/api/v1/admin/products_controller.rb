@@ -7,13 +7,13 @@ class Api::V1::Admin::ProductsController < Api::V1::Admin::BaseController
                       .page(params[:page])
                       .per(params[:page_size])
 
-    render json: { products: products.map{ |p| ProductSerializer.new(p).as_json },
+    render json: { products: products.map { |p| ProductSerializer.new(p).as_json },
                    record_count: products.size }
   end
 
   def show
     product = Product.friendly.find(params[:id])
-    render json: product
+    render json: product, serializer: ProductWithVariantSerializer
   end
 
   def create
@@ -63,6 +63,6 @@ class Api::V1::Admin::ProductsController < Api::V1::Admin::BaseController
     params.require(:product).permit(:name, :description, :category_id,
                                     :permalink, :available_at, :deleted_at,
                                     :meta_keywords, :meta_description, :brand_id, :product_keywords,
-                                    product_keywords: [], meta_keywords: [])
+                                    option_type_ids: [], product_keywords: [], meta_keywords: [])
   end
 end

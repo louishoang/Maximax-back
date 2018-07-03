@@ -2,7 +2,9 @@
 
 class Api::V1::Admin::OptionTypesController < Api::V1::Admin::BaseController
   def index
-    option_types = OptionType.includes(:option_values).all
+    option_types = OptionType.includes(:option_values)
+                             .with_ids(params[:ids])
+                             .all
     render json: option_types
   end
 
