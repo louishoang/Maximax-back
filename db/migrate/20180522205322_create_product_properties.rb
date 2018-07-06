@@ -5,7 +5,7 @@ class CreateProductProperties < ActiveRecord::Migration[5.2]
     create_table :product_properties do |t|
       t.integer :product_id, null: false
       t.integer :property_id, null: false
-      t.integer :position, default: 0
+      t.integer :position, default: 1
       t.string :value
       t.timestamps
     end
