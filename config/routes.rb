@@ -16,6 +16,11 @@ Rails.application.routes.draw do
         resources :properties
         resources :categories, only: :index
         resources :brands, only: %i[index create update]
+        resources :product_properties do
+          collection do
+            post :update_from_product
+          end
+        end
       end
     end
   end

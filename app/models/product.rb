@@ -21,6 +21,8 @@ class Product < ApplicationRecord
   has_many :product_option_types, dependent: :destroy, inverse_of: :product
   has_many :option_types, through: :product_option_types
 
+  accepts_nested_attributes_for :product_properties, allow_destroy: true
+
   before_validation :sanitize_data
   before_validation :not_active_on_create!, on: :create
 

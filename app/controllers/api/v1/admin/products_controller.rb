@@ -65,6 +65,7 @@ class Api::V1::Admin::ProductsController < Api::V1::Admin::BaseController
     params.require(:product).permit(:name, :description, :category_id,
                                     :permalink, :available_at, :deleted_at,
                                     :meta_keywords, :meta_description, :brand_id, :product_keywords,
-                                    option_type_ids: [], product_keywords: [], meta_keywords: [])
+                                    :product_properties, product_properties: [], option_type_ids: [], product_keywords: [],
+                                                         meta_keywords: [])
   end
 end
