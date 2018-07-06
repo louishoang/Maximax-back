@@ -2,7 +2,7 @@
 
 class Api::V1::Admin::ProductsController < Api::V1::Admin::BaseController
   def index
-    products = Product.includes(:product_images)
+    products = Product.includes(product_images: [file_attachment: [:blob]])
                       .order(params[:sort_by])
                       .page(params[:page])
                       .per(params[:page_size])
@@ -12,7 +12,9 @@ class Api::V1::Admin::ProductsController < Api::V1::Admin::BaseController
   end
 
   def show
-    product = Product.friendly.find(params[:id])
+    product = Product.includes(product_images: [file_attachment: [:blob]])
+                     .friendly.find(params[:id])
+
     render json: product, serializer: ProductWithVariantSerializer
   end
 
