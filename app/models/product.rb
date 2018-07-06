@@ -31,16 +31,18 @@ class Product < ApplicationRecord
   validates :meta_description, presence: true,   length: { maximum: 255 }
 
   def status
-    return STATUS_PENDING if available_at.nil? || deleted_at.nil?
-
     current_time = Time.now
     if current_time < available_at
       STATUS_PENDING
-    elsif current_time.between?(available_at, deleted_at)
+    elsif status_active?(current_time)
       STATUS_ACTIVE
     else
       STATUS_DELETED
     end
+  end
+
+  def status_active?(current_time)
+    current_time > available_at && deleted_at.nil? || current_time.between?(available_at, deleted_at)
   end
 
   def master_variant
