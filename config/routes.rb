@@ -22,6 +22,12 @@ Rails.application.routes.draw do
           end
         end
       end
+
+      resources :home, only: :index do
+        collection do
+          get :new_arrivals
+        end
+      end
     end
   end
 end
