@@ -32,6 +32,12 @@ class Product < ApplicationRecord
   validates :permalink,        uniqueness: true, length: { maximum: 150 }
   validates :meta_description, presence: true,   length: { maximum: 255 }
 
+  scope :with_category_ids, lambda {|ids|
+    if ids.present?
+      joins(:category).where('categories.id IN (?)', ids.join(','))
+    end
+  }
+
   def status
     current_time = Time.now
     if current_time < available_at
