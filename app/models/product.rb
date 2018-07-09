@@ -32,10 +32,8 @@ class Product < ApplicationRecord
   validates :permalink,        uniqueness: true, length: { maximum: 150 }
   validates :meta_description, presence: true,   length: { maximum: 255 }
 
-  scope :with_category_ids, lambda {|ids|
-    if ids.present?
-      joins(:category).where('categories.id IN (?)', ids.join(','))
-    end
+  scope :with_category_ids, lambda { |ids|
+    joins(:category).where('categories.id IN (?)', ids.join(',')) if ids.present?
   }
 
   def status

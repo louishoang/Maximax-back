@@ -43,6 +43,7 @@ gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'cancancan', '~> 2.0'
 gem 'devise'
+gem 'image_processing', '~> 1.2'
 gem 'kaminari'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rubocop', require: false
