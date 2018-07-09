@@ -16,19 +16,14 @@ class Api::V1::HomeController < Api::V1::BaseController
   end
 
   def new_arrivals
-    category_ids = if params[:category_name].present?
-                     Category.find_by_name(params[:category_name]).descendents.pluck(:id)
-                   end
+    category_ids = (Category.find_by_name(params[:category_name]).descendents.pluck(:id) if params[:category_name].present?)
     products = Product.includes(product_images: [file_attachment: [:blob]])
                       .order(params[:sort_by])
                       .with_category_ids(category_ids)
                       .page(params[:page])
                       .per(params[:page_size])
 
-
-    if products.size < MIN_NEW_ARRIVAL_PRODUCTS
-      products = serializer_list(products) + random(MIN_NEW_ARRIVAL_PRODUCTS - products.size)
-    end
+    products = serializer_list(products) + random(MIN_NEW_ARRIVAL_PRODUCTS - products.size) if products.size < MIN_NEW_ARRIVAL_PRODUCTS
 
     render json: products
   end
