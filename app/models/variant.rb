@@ -4,9 +4,11 @@ class Variant < ApplicationRecord
   before_save :ensure_one_master
 
   belongs_to :product
-  # belongs_to :inventory
+  belongs_to :inventory, optional: true
   has_many :option_value_variants
   has_many :option_values, through: :option_value_variants
+
+  accepts_nested_attributes_for :inventory, allow_destroy: true
 
   validates :price,       presence: true
   validates :cost,        presence: true
@@ -15,6 +17,10 @@ class Variant < ApplicationRecord
 
   delegate  :brand, to: :product, allow_nil: true
   scope :master, -> { where(master: true) }
+
+  def inventory
+    association(:inventory).load_target || NullInventory.new
+  end
 
   private
 
