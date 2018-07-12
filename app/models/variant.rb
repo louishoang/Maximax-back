@@ -18,10 +18,6 @@ class Variant < ApplicationRecord
   delegate  :brand, to: :product, allow_nil: true
   scope :master, -> { where(master: true) }
 
-  def inventory
-    association(:inventory).load_target || NullInventory.new
-  end
-
   private
 
   def ensure_one_master

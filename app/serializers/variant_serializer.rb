@@ -6,11 +6,16 @@ class VariantSerializer < ActiveModel::Serializer
 
   attribute :inventory_attributes do |_attr|
     i = object.inventory
-    {
-      vendor_link: i.vendor_link,
-      vendor_sku: i.vendor_sku,
-      count_on_hand: i.count_on_hand
-    }
+
+    if i.nil?
+      { vendor_link: 'http://', vendor_sku: '', count_on_hand: 0 }
+    else
+      {
+        vendor_link: i.vendor_link,
+        vendor_sku: i.vendor_sku,
+        count_on_hand: i.count_on_hand
+      }
+    end
   end
 
   attribute :option_list do |_attr|
