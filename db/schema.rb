@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_180_702_183_227) do
+ActiveRecord::Schema.define(version: 20_180_711_192_646) do
   create_table 'active_storage_attachments', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
     t.string 'name', null: false
     t.string 'record_type', null: false
@@ -60,6 +60,9 @@ ActiveRecord::Schema.define(version: 20_180_702_183_227) do
     t.integer 'count_on_hand', default: 0
     t.integer 'count_pending_to_customer', default: 0
     t.integer 'count_pending_from_supplier', default: 0
+    t.text 'vendor_link'
+    t.string 'sku', limit: 50
+    t.index ['sku'], name: 'index_inventories_on_sku'
   end
 
   create_table 'option_types', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
@@ -113,7 +116,7 @@ ActiveRecord::Schema.define(version: 20_180_702_183_227) do
   create_table 'product_properties', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
     t.integer 'product_id', null: false
     t.integer 'property_id', null: false
-    t.integer 'position', default: 1
+    t.integer 'position', default: 0
     t.string 'value'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false

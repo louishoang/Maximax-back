@@ -28,6 +28,8 @@ Rails.application.routes.draw do
           get :new_arrivals
         end
       end
+
+      resources :products, only: :show
     end
   end
 end
