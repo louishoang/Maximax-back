@@ -21,7 +21,8 @@ class Api::V1::Admin::VariantsController < Api::V1::Admin::BaseController
     if variant.update(variant_params)
       head :ok
     else
-      render json: variant.errors.full_messages.join(', '), status: :unprocessable_entity
+      render json: { error_message: variant.errors.full_messages.join(', ') },
+             status: :unprocessable_entity
     end
   end
 
@@ -40,7 +41,8 @@ class Api::V1::Admin::VariantsController < Api::V1::Admin::BaseController
 
   def variant_params
     params.require(:variant).permit(:id, :name, :sku, :cost, :price, :deleted_at,
-                                    :inventory_id, :product_id, :master, option_value_ids: [],
-                                                                         inventory_attributes: %i[vendor_link count_on_hand sku vendor_sku])
+                                    :inventory_id, :product_id, :master,
+                                    option_value_ids: [],
+                                    inventory_attributes: %i[vendor_link count_on_hand sku vendor_sku])
   end
 end
