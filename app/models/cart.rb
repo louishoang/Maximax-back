@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Cart < ApplicationRecord
   belongs_to :user
   has_many :cart_items, dependent: :destroy
@@ -30,7 +32,7 @@ class Cart < ApplicationRecord
     duplicated = cart_items.group(:variant_id).having('COUNT(variant_id) > 1').count
     duplicated.each do |g|
       cart_items.where(variant_id: g[0]).destroy_all
-      CartItem.create(cart_id: self.id, variant_id: g[0], quantity: g[1])
+      CartItem.create(cart_id: id, variant_id: g[0], quantity: g[1])
     end
   end
 end

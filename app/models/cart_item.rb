@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CartItem < ApplicationRecord
   belongs_to :cart, touch: true
   belongs_to :variant

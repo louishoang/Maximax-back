@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::CartsController < Api::V1::BaseController
   def update
     cart = Cart.find_by_id(params[:id])

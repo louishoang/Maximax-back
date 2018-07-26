@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::CartItemsController < Api::V1::BaseController
   def create
     cart_item = CartItem.new(cart_item_params)
