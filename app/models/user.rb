@@ -17,6 +17,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
+  has_many :carts
+
   def auth_token_expired_at
     auth_token_issued_at + DEFAULT_AUTH_TOKEN_REFRESH_CYCLE
   end

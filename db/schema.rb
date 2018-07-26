@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_180_711_192_646) do
+ActiveRecord::Schema.define(version: 20_180_714_195_048) do
   create_table 'active_storage_attachments', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
     t.string 'name', null: false
     t.string 'record_type', null: false
@@ -36,6 +36,24 @@ ActiveRecord::Schema.define(version: 20_180_711_192_646) do
 
   create_table 'brands', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
     t.string 'name', null: false
+  end
+
+  create_table 'cart_items', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
+    t.integer 'cart_id'
+    t.integer 'variant_id', null: false
+    t.integer 'quantity', default: 1
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['cart_id'], name: 'index_cart_items_on_cart_id'
+    t.index ['variant_id'], name: 'index_cart_items_on_variant_id'
+  end
+
+  create_table 'carts', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
+    t.integer 'user_id'
+    t.integer 'cart_type'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['user_id'], name: 'index_carts_on_user_id'
   end
 
   create_table 'categories', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
