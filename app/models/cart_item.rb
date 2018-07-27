@@ -6,6 +6,7 @@ class CartItem < ApplicationRecord
 
   validates :variant_id, presence: true
   validates :cart_id, presence: true
+  delegate :count_on_hand, to: :variant, allow_nil: true
 
   scope :inactive, -> { joins(variant: :inventory).where('inventories.count_on_hand <= ?', 0) }
 

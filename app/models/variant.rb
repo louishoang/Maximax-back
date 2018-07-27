@@ -19,6 +19,7 @@ class Variant < ApplicationRecord
   validates :sku, uniqueness: { scope: :product_id }
 
   delegate  :brand, to: :product, allow_nil: true
+  delegate :count_on_hand, to: :inventory, allow_nil: true
   scope :master, -> { where(master: true) }
 
   private
