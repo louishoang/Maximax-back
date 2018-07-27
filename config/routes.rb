@@ -35,7 +35,7 @@ Rails.application.routes.draw do
           get :find_cart_by_user
         end
       end
-      resources :cart_items, only: :create
+      resources :cart_items, only: %i[create update destroy]
     end
   end
 end
