@@ -16,8 +16,8 @@ class Api::V1::CartsController < Api::V1::BaseController
   end
 
   def find_cart_by_user
-    cart = Cart.find_or_create_by(user_id: params[:user_id], cart_type: :shopping_cart)
-    cart.filter_inactive_items
+    cart = Cart.find_or_create_by(user_id: params[:user_id])
+    # cart.filter_inactive_items
 
     if cart
       render json: cart
@@ -29,6 +29,6 @@ class Api::V1::CartsController < Api::V1::BaseController
   private
 
   def cart_params
-    params.require(:cart).permit(:id, cart_items_attributes: %i[id variant_id quantity])
+    params.require(:cart).permit(:id, cart_items_attributes: %i[id variant_id quantity item_type active])
   end
 end

@@ -5,5 +5,6 @@ FactoryBot.define do
     cart
     variant
     quantity 1
+    item_type 0
   end
 end

@@ -5,11 +5,8 @@ class Cart < ApplicationRecord
   has_many :cart_items, dependent: :destroy
 
   after_touch :prevent_cart_item_duplication
-
-  enum cart_type: %i[shopping_cart wishlist]
   validates :user_id, presence: true
   accepts_nested_attributes_for :cart_items, allow_destroy: true
-  scope :shopping_carts, -> { where(cart_type: :shopping_cart) }
 
   def sub_total
     cart_items.map(&:total).sum
@@ -19,9 +16,9 @@ class Cart < ApplicationRecord
     cart_items.map(&:quantity).sum
   end
 
-  def filter_inactive_items
-    cart_items.inactive.destroy_all
-  end
+  # def filter_inactive_items
+  #   cart_items.inactivate_zero_stock
+  # end
 
   private
 
