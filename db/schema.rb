@@ -42,15 +42,17 @@ ActiveRecord::Schema.define(version: 20_180_714_195_048) do
     t.integer 'cart_id'
     t.integer 'variant_id', null: false
     t.integer 'quantity', default: 1
+    t.integer 'item_type'
+    t.boolean 'active', default: true
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.index ['cart_id'], name: 'index_cart_items_on_cart_id'
+    t.index ['item_type'], name: 'index_cart_items_on_item_type'
     t.index ['variant_id'], name: 'index_cart_items_on_variant_id'
   end
 
   create_table 'carts', options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8', force: :cascade do |t|
     t.integer 'user_id'
-    t.integer 'cart_type'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.index ['user_id'], name: 'index_carts_on_user_id'
